@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine?</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Comic Sans MS', cursive;
+    background: linear-gradient(135deg, #ffd6e0, #e7c6ff, #caffbf);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-align: center;
+}
+
+.container {
+    background: rgba(255,255,255,0.6);
+    padding: 40px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+h1 {
+    font-size: 32px;
+    color: #6d597a;
+}
+
+button {
+    padding: 12px 30px;
+    margin: 20px;
+    border: none;
+    border-radius: 30px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: #ff8fab;
+    color: white;
+}
+
+#noBtn {
+    background: #bde0fe;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.popup {
+    position: absolute;
+    color: #ff4d6d;
+    font-weight: bold;
+    font-size: 18px;
+    animation: floatUp 4s ease forwards;
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-120px); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="mainBox">
+    <h1>Will you be my Valentine again? 💗</h1>
+    <button id="yesBtn" onclick="sayYes()">Yes 💖</button>
+    <button id="noBtn" onclick="sayNo()">No 💔</button>
+</div>
+
+<script>
+let noClickCount = 0;
+let yesSize = 1;
+
+const messages = [
+    "Are you sureee? 🥺",
+    "Please think againnn 💭",
+    "Nooo don’t do this to me 😭",
+    "My heart just cracked a little 💔",
+    "You can’t mean thattt",
+    "Wait wait reconsider pls 😔",
+    "But we’re so cute together 🥹",
+    "That button looks wrong…",
+    "Your cursor slipped right?",
+    "I’ll pretend I didn’t see that 👀",
+    "Try clicking yes instead 😌",
+    "Don’t break my pastel heart 💗",
+    "This is not very valentine-core of you",
+    "Okay but imagine saying yes though ✨",
+    "The yes button is literally glowing for you"
+];
+
+function sayNo() {
+    noClickCount++;
+
+    yesSize += 0.25;
+    document.getElementById("yesBtn").style.transform = `scale(${yesSize})`;
+
+    let popup = document.createElement("div");
+    popup.className = "popup";
+    popup.innerText = messages[noClickCount % messages.length];
+    popup.style.left = Math.random() * 70 + "vw";
+    popup.style.top = Math.random() * 70 + "vh";
+
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+        popup.remove();
+    }, 4000); // stays longer now
+}
+
+function sayYes() {
+    document.body.innerHTML = `
+    <div style="
+        height:100vh;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        background: linear-gradient(135deg, #ffafcc, #cdb4db);
+        color:white;
+        font-family:'Comic Sans MS', cursive;
+        text-align:center;
+        animation: fadeIn 1s ease-in;
+    ">
+        <h1 style="font-size:50px;">
+        YAYAYYAY YAYAYYY THANKUU 💖💖
+        </h1>
+        <p style="font-size:22px; max-width:500px;">
+        You just made my whole day — no wait actually my whole life hehe 🌸✨
+        </p>
+        <div style="font-size:40px;">💗💞💘💕💓💖</div>
+    </div>
+    `;
+}
+</script>
+
+</body>
+</html>
